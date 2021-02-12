@@ -28,7 +28,7 @@ exports.signup = (req, res, next) => {
 };
 //* //////////////////// signup END //////////////////// */
 
-//* *****Permet de vérifier si nouvel utilisateur qui tente de se connecter dispose d'identifiants valides***** *//
+//* *****Permet de vérifier si un utilisateur qui tente de se connecter dispose d'identifiants valides***** *//
 // nous utilisons notre modèle Mongoose pour vérifier que l'e-mail entré par l'utilisateur correspond à un utilisateur existant de la base de données :
 		/*dans le cas contraire, nous renvoyons une erreur 401 Unauthorized*/ 
 		/*si l'e-mail correspond à un utilisateur existant, nous continuons*/

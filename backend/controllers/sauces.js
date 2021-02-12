@@ -36,7 +36,7 @@ exports.createSauce = (req, res, next) => {
 // S'il n'existe pas, on traite l'objet entrant
 // On effectue la modification
 exports.modifySauce = (req, res, next) => {
-	const sauceObject = {};
+	let sauceObject = {};
 	req.file
 		? (Sauce.findOne({
 				_id: req.params.id,

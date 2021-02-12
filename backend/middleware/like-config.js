@@ -8,8 +8,8 @@ const Sauce = require('../models/Sauce');
 // Si un utilisateur like une sauce, et qu'il n'a pas déjà liké cette sauce, on traite le like
 // sinon si un utilisateur dislike une sauce, et qu'il n'a pas déjà liké cette sauce, on traite le dislike
 // Sinon : 
-		/* Un utilisateur qui a liké cette sauce pourra retirer son like */
-		/* Un utilisateur qui a disliké cette sauce pourra retirer son dislike */
+		/* Un utilisateur qui a liké une sauce pourra retirer son like */
+		/* Un utilisateur qui a disliké une sauce pourra retirer son dislike */
 module.exports = (req, res, next) => {
 	let message = '';
 	Sauce.findOne({ _id: req.params.id })

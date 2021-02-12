@@ -16,6 +16,9 @@ const path = require('path');
 // Importation du package Helmet vous aide à protéger votre application de certaines des vulnérabilités bien connues du Web en configurant de manière appropriée des en-têtes HTTP.
 const helmet = require('helmet');
 
+//Importation du package express-session
+const session = require('express-session');
+
 //* *****Déclaration des routes***** *//
 // On importe la route dédiée aux sauces
 const saucesRoutes = require('./routes/sauces');
@@ -23,10 +26,10 @@ const saucesRoutes = require('./routes/sauces');
 // On importe la route dédiée aux utilisateurs
 const userRoutes = require('./routes/user');
 
-//* *****Connection à la base de données mongoDB***** *//
 // utilisation du package dotenv pour masquer les informations de connexion à la base de données à l'aide de variables d'environnement
 require('dotenv').config();
 
+//* *****Connection à la base de données mongoDB***** *//
 mongoose
 	.connect(process.env.DB_URI, {
 		useNewUrlParser: true,
@@ -53,10 +56,27 @@ app.use((req, res, next) => {
 	next();
 });
 
+
+const hour = 3600000;
+const expiryDate = new Date(Date.now() + hour);
+app.set('trust proxy', 1); // trust first proxy
+app.use(
+	session({
+		secret: process.env.SEC_SES,
+		name: 'sessionId',
+		resave: false,
+		saveUninitialized: true,
+		cookie: {
+			secure: true,
+			expires: expiryDate,
+		},
+	}),
+); 
+
 // Middleware qui permet de transformer le corp de la requête en un objet JSON utilisable
 app.use(bodyParser.json());
 
-
+// Helmet aide à protéger de certaines des vulnérabilités bien connues du Web en configurant de manière appropriée des en-têtes HTTP.
 app.use(helmet());
 
 // Midleware qui permet de charger les fichiers qui sont dans le repertoire images

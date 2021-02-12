@@ -4,6 +4,9 @@ const bcrypt = require('bcrypt');
 // On importe le package jsonwebtoken pour attribuer un token à un utilisateur au moment ou il se connecte
 const jwt = require('jsonwebtoken');
 
+// utilisation du package dotenv pour masquer les informations de connexion à la base de données à l'aide de variables d'environnement
+require('dotenv').config();
+
 // On importe notre model User 
 const User = require('../models/User');
 
@@ -49,7 +52,7 @@ exports.login = (req, res, next) => {
 					}
 					res.status(200).json({
 						userId: user._id,
-						token: jwt.sign({ userId: user._id }, 'RANDOM_TOKEN_SECRET', {
+						token: jwt.sign({ userId: user._id }, process.env.JWT_TOKEN, {
 							expiresIn: '24h',
 						}),
 					});

@@ -5,6 +5,9 @@ const http = require('http');
 // Import de app pour utilisation de l'application sur le serveur
 const app = require('./app');
 
+// utilisation du package dotenv pour masquer les informations de connexion à la base de données à l'aide de variables d'environnement
+require('dotenv').config();
+
 // La fonction normalizePort renvoie un port valide, qu'il soit fourni sous la forme d'un numéro ou d'une chaîne
 const normalizePort = val => {
 	const port = parseInt(val, 10);

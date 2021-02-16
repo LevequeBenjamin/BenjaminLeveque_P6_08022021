@@ -3,9 +3,6 @@
 // On importe le package mongoose
 const mongoose = require('mongoose');
 
-// On importe les middlewares verifySauce
-const validator = require("../middleware/verifySauce")
-
 // Création d'un schema mongoose pour que les données de la base mongoDB ne puissent pas différer de celui précisé dans le schema model des sauces. L'id est généré automatiquement par MongoDB
 const sauceSchema = mongoose.Schema({
 	// UserId du createur
@@ -23,29 +20,29 @@ const sauceSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	imageUrl: {
+		type: String,
+		required: true,
+	},
 	name: {
 		type: String,
 		required: true,
-		validate: validator.nameValidator,
+		//validate: validator.nameValidator,
 	},
 	manufacturer: {
 		type: String,
 		required: true,
-		validate: validator.manufacturerValidator,
+		//validate: validator.manufacturerValidator,
 	},
 	description: {
 		type: String,
 		required: true,
-		validate: validator.descriptionValidator,
+		//validate: validator.descriptionValidator,
 	},
 	mainPepper: {
 		type: String,
 		required: true,
-		validate: validator.ingredientValidator,
-	},
-	imageUrl: {
-		type: String,
-		required: true,
+		//validate: validator.ingredientValidator,
 	},
 	heat: {
 		type: Number,

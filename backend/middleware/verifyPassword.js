@@ -6,8 +6,8 @@ const passwordSchema = require('../models/password');
 //* *****Midlleware verifyPassword***** *//
 //Vérifie que le mot de passe valide le schema et le regex
 module.exports = (req, res, next) => {
-	const regexTrue = /[§!@#$%^&*().?":{}|<>]/;
-	const regexFalse = /[=']/;
+	const regexTrue = /[§!@#$%^&*().?{}|<>]/;
+	const regexFalse = /[='":]/;
 	if (
 		!passwordSchema.validate(req.body.password) ||
 		!regexTrue.test(req.body.password) || regexFalse.test(req.body.password)
@@ -24,5 +24,4 @@ module.exports = (req, res, next) => {
 		next();
 	}
 };
-
 //* //////////////////// verifyPassword END //////////////////// */

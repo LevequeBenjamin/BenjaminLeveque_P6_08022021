@@ -26,8 +26,7 @@ exports.createSauce = (req, res, next) => {
 	sauce
 		.save()
 		.then(() => res.status(201).json({ message: 'Objet renregistré !' }))
-		.catch(error => 
-			res.status(400).json({ error }));
+		.catch(error => res.status(400).json({ error }));
 };
 //* //////////////////// createSauce END //////////////////// */
 
@@ -115,6 +114,8 @@ exports.getAllSauce = (req, res, next) => {
 
 //* *****Permet de liker, disliker une sauce***** *//
 exports.likeDislikeSauce = (req, res, next) => {
+	// Si il s'agit d'un like
+	// On push l'utilisateur et on incrémente le compteur de 1
 	if (req.body.like === 1) {
 		Sauce.updateOne(
 			{
@@ -140,6 +141,8 @@ exports.likeDislikeSauce = (req, res, next) => {
 				}),
 			);
 	}
+	// S'il s'agit d'un dislike
+	// On push l'utilisateur et on incrémente le compteur de 1
 	if (req.body.like === -1) {
 		Sauce.updateOne(
 			{
@@ -165,6 +168,9 @@ exports.likeDislikeSauce = (req, res, next) => {
 				}),
 			);
 	}
+	// Si il s'agit d'annuler un like ou un dislike
+	// Si il s'agit d'annuler un like
+	// On pull l'utilisateur et on incrémente le compteur de -1
 	if (req.body.like === 0) {
 		Sauce.findOne({
 			_id: req.params.id,
@@ -195,6 +201,8 @@ exports.likeDislikeSauce = (req, res, next) => {
 							}),
 						);
 				}
+				// Si il s'agit d'annuler un dislike
+				// On pull l'utilisateur et on incrémente le compteur de -1
 				if (sauce.usersDisliked.includes(req.body.userId)) {
 					Sauce.updateOne(
 						{

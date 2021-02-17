@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 // On importe le package jsonwebtoken pour attribuer un token à un utilisateur au moment ou il se connecte
 const jwt = require('jsonwebtoken');
 
+const obfuscatorEmail = require('obfuscator-email');
+
 // utilisation du package dotenv pour masquer les informations de connexion à la base de données à l'aide de variables d'environnement
 require('dotenv').config();
 
@@ -15,11 +17,12 @@ const User = require('../models/User');
 // Il s'agit d'une fonction asynchrone qui renvoie une Promise dans laquelle nous recevons le hash généré
 // Dans notre bloc then , nous créons un utilisateur et l'enregistrons dans la base de données, en renvoyant une réponse de réussite en cas de succès, et des erreurs avec le code d'erreur en cas d'échec
 exports.signup = (req, res, next) => {
+	const obfuscateEmail = obfuscatorEmail(req.body.email);
 	bcrypt
 		.hash(req.body.password, 10)
 		.then(hash => {
 			const user = new User({
-				email: req.body.email,
+				email: obfuscateEmail,
 				password: hash,
 			});
 			user
@@ -39,7 +42,8 @@ exports.signup = (req, res, next) => {
 		/*s'ils ne correspondent pas, nous renvoyons une erreur 401 Unauthorized et un message « Mot de passe incorrect ! »*/
 		/*s'ils correspondent, les informations d'identification de notre utilisateur sont valides. Dans ce cas, nous renvoyons une réponse 200 contenant l'ID utilisateur et un token.*/
 exports.login = (req, res, next) => {
-	User.findOne({ email: req.body.email })
+	const obfuscateEmail = obfuscatorEmail(req.body.email);
+	User.findOne({ email: obfuscateEmail })
 		.then(user => {
 			if (!user) {
 				return res.status(401).json({ error: 'Utilisateur non trouvé !' });

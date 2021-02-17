@@ -27,22 +27,18 @@ const sauceSchema = mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
-		//validate: validator.nameValidator,
 	},
 	manufacturer: {
 		type: String,
 		required: true,
-		//validate: validator.manufacturerValidator,
 	},
 	description: {
 		type: String,
 		required: true,
-		//validate: validator.descriptionValidator,
 	},
 	mainPepper: {
 		type: String,
 		required: true,
-		//validate: validator.ingredientValidator,
 	},
 	heat: {
 		type: Number,

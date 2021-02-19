@@ -10,7 +10,8 @@ module.exports = (req, res, next) => {
 	const regexFalse = /[='":]/;
 	if (
 		!passwordSchema.validate(req.body.password) ||
-		!regexTrue.test(req.body.password) || regexFalse.test(req.body.password)
+		!regexTrue.test(req.body.password) ||
+		regexFalse.test(req.body.password)
 	) {
 		res.writeHead(
 			400,

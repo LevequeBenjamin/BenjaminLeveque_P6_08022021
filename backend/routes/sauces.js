@@ -11,10 +11,11 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 //On importe le middleware multer pour la gestion des images
 const multer = require('../middleware/multer-config');
+// On importe le middleware verifySauce qui pour la validation
+const verifySauce = require('../middleware/verifySauce');
 
 // On associe les fonctions aux différentes routes, on importe le controller
 const saucesCtrl = require('../controllers/sauces');
-const verifySauce = require('../middleware/verifySauce');
 
 //* *****Création des différentes ROUTES de l'API en leurs précisant, dans l'ordre, leurs middlewares et controllers***** *//
 // Route qui permet de créer une sauce
@@ -32,4 +33,3 @@ router.post('/:id/like', auth, saucesCtrl.likeDislikeSauce);
 
 // Nous exportons ensuite le router
 module.exports = router;
- 

@@ -20,7 +20,7 @@ const helmet = require('helmet');
 const session = require('express-session');
 
 // Importation du package sanitaze-middleware
-const sanitizeMiddleware = require("sanitize-middleware");
+const sanitizeMiddleware = require('sanitize-middleware');
 
 //* *****Déclaration des routes***** *//
 // On importe la route dédiée aux sauces
@@ -59,7 +59,8 @@ app.use((req, res, next) => {
 	next();
 });
 
-
+// Options pour sécuriser les cookies
+// 1 heure (60 * 60 * 1000)
 const hour = 3600000;
 const expiryDate = new Date(Date.now() + hour);
 app.set('trust proxy', 1); // trust first proxy
@@ -74,7 +75,7 @@ app.use(
 			expires: expiryDate,
 		},
 	}),
-); 
+);
 
 // Middleware qui permet de transformer le corp de la requête en un objet JSON utilisable
 app.use(bodyParser.json());

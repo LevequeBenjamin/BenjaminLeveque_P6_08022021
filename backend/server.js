@@ -61,6 +61,5 @@ server.on('listening', () => {
 	console.log(`Listening on ${bind}`);
 });
 
-
 // Le serveur écoute le port définit plus haut
 server.listen(port);

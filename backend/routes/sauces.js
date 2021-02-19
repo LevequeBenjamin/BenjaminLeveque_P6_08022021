@@ -19,7 +19,7 @@ const saucesCtrl = require('../controllers/sauces');
 
 //* *****Création des différentes ROUTES de l'API en leurs précisant, dans l'ordre, leurs middlewares et controllers***** *//
 // Route qui permet de créer une sauce
-router.post('/', auth, verifySauce, multer, saucesCtrl.createSauce);
+router.post('/', auth, multer, saucesCtrl.createSauce);
 // Route qui permet de modifier une sauce
 router.put('/:id', auth, verifySauce, multer, saucesCtrl.modifySauce);
 // Route qui permet de supprimer une sauce

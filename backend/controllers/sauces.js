@@ -9,6 +9,7 @@ const fs = require('fs');
 // On supprime l'id généré automatiquement et envoyé par le front-end.
 // On crée ensuite une instance Sauce à partir de sauceObjet
 // On traite l'image
+// On valide les champs à l'aide de regex
 // Sauvegarde de la sauce dans la base de données
 exports.createSauce = (req, res, next) => {
 	const sauceObject = JSON.parse(req.body.sauce);
@@ -23,10 +24,29 @@ exports.createSauce = (req, res, next) => {
 		usersLiked: [],
 		usersDisliked: [],
 	});
-	sauce
-		.save()
-		.then(() => res.status(201).json({ message: 'Objet renregistré !' }))
-		.catch(error => res.status(400).json({ error }));
+	const regex = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,150}$/;
+	if (
+		!regex.test(sauceObject.name) ||
+		!regex.test(sauceObject.manufacturer) ||
+		!regex.test(sauceObject.description) ||
+		!regex.test(sauceObject.mainPepper)
+	) {
+		const filename = sauce.imageUrl.split('/images/')[1];
+		fs.unlinkSync(`images/${filename}`);
+		res.writeHead(
+			400,
+			'{"message":"Vous devez utiliser entre 3 et 150 caractères, et ne pas utiliser de caractères spéciaux !"}',
+			{
+				'content-type': 'application/json',
+			},
+		);
+		res.end('Format sauce incorrect !');
+	} else {
+		sauce
+			.save()
+			.then(() => res.status(201).json({ message: 'Objet renregistré !' }))
+			.catch(error => res.status(400).json({ error }));
+	}
 };
 //* //////////////////// createSauce END //////////////////// */
 

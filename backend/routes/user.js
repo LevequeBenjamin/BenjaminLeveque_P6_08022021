@@ -1,4 +1,4 @@
-//* *****Création du rooter qui contient les fonctions qui s'appliquent aux différentes routes pour les utilisateur***** *//
+/* *****Création du rooter qui contient les fonctions qui s'appliquent aux différentes routes pour les utilisateur***** */
 
 // Importation du Framework Express
 const express = require('express');

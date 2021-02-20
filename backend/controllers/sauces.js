@@ -24,7 +24,7 @@ exports.createSauce = (req, res, next) => {
 		usersLiked: [],
 		usersDisliked: [],
 	});
-	const regex = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{3,150}$/;
+	const regex = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.?!,_\s-]{3,150}$/;
 	if (
 		!regex.test(sauceObject.name) ||
 		!regex.test(sauceObject.manufacturer) ||

@@ -20,7 +20,7 @@ const helmet = require('helmet');
 const session = require('express-session');
 
 // Importation du package sanitaze-middleware
-const sanitizeMiddleware = require('sanitize-middleware');
+//const sanitizeMiddleware = require('sanitize-middleware');
 
 //* *****Déclaration des routes***** *//
 // On importe la route dédiée aux sauces
@@ -84,7 +84,7 @@ app.use(bodyParser.json());
 app.use(helmet());
 
 // Sanitize-middleware permet de se protéger contre les attaques de scripts intersites (XSS) et d'injection de commandes
-app.use(sanitizeMiddleware());
+//app.use(sanitizeMiddleware());
 
 // Midleware qui permet de charger les fichiers qui sont dans le repertoire images
 app.use('/images', express.static(path.join(__dirname, 'images')));

@@ -20,7 +20,7 @@ const bruteForceCreate = require('../middleware/bruteForceCreate');
 const userCtrl = require('../controllers/user');
 
 //* *****Création des routes Inscription et Connexion de l'API avec les middlewares et les controllers d'authentification et de sécurité qui leur sont appliquées***** *//
-// Chiffre le mot de passe de l'utilisateur, ajoute l'utilisateur à la base dedonnées
+// Chiffre le mot de passe de l'utilisateur, ajoute l'utilisateur à la base de données
 router.post('/signup', verifyPassword, verifyEmail, bruteForceCreate, userCtrl.signup);
 // Vérifie les informations d'identification de l'utilisateur, en renvoyant l'identifiant userID depuis la base de données et un TokenWeb JSON signé(contenant également l'identifiant userID)
 router.post('/login', verifyEmail, bruteForce, userCtrl.login);
